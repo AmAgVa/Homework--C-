@@ -4,10 +4,11 @@ CXXOPT := -O3
 CXXSTD := -std=c++17
 INCLUDES := -I include -I external/include
 CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES)
-LDFLAGS := -L external/lib -l argumentum
 
 # List of source files in the src/ directory (add your source files here)
 SOURCES := $(wildcard src/*.cxx)
+
+SOURCES += main.cxx
 
 # Generate a list of object files based on the source files
 OBJECTS := $(SOURCES:src/%.cxx=src/%.o)
@@ -16,9 +17,9 @@ OBJECTS := $(SOURCES:src/%.cxx=src/%.o)
 
 all: main
 
-# Your main executable depends on the object files and external libraries
+# Your main executable depends on the object files
 main: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Build object files from source files
 src/%.o: src/%.cxx
