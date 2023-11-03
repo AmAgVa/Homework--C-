@@ -28,6 +28,16 @@ make -j8 install # If you are on an 8-core machine
 ```
 
 
+
+# Usage
+Provide detailed instructions on how to use your application. Include command-line options, expected input, and sample usage examples.
+# Display help message
+./main -h
+
+# Read a CSV file
+./main -i inputfile.csv
+
+
 # Directory structure
 
 The base directory here contains your "main" file, i.e. the C++ file that you

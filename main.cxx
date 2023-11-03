@@ -1,21 +1,31 @@
+
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include "argh.h"
+#include "csv.h"
 
 int main(int argc, char *argv[]) {
-  std::vector<std::string> args(argv, argv + argc);
+  argh::parser cmdl(argc, argv);
 
-  if (std::find(args.begin(), args.end(), "-h") != args.end() || std::find(args.begin(), args.end(), "--help") != args.end()) {
-    std::cout << "Help message when passing in -h or --help" << std::endl;
+  if (cmdl[{ "-h", "--help" }]) {
+    std::cout << "Help message" << std::endl;
     return 0;
   }
 
-  if (args.size() >= 2 && (args[1] == "-i" || args[1] == "--input-file")) {
-    if (args.size() >= 3) {
-      std::string inputFile = args[2];
+  if (cmdl[{"-i", "--input-file"}]) {
+    std::string inputFile;
+    if (cmdl(1) >> inputFile) {
       std::cout << "Reading the CSV file: " << inputFile << std::endl;
-      // Add your code to process the CSV file here
+
+      // Add code to process the CSV file using your CSV parsing library.
+      io::CSVReader<5> in(inputFile);
+      in.read_header(io::ignore_extra_column, "day", "year", "month", "ignoreme", "measurement");
+      int day, year, month;
+      double measurement;
+
+      while (in.read_row(day, year, month, std::ignore, measurement)) {
+        // Process your CSV data here, ignoring the "ignoreme" column.
+        std::cout << "Day: " << day << ", Year: " << year << ", Month: " << month << ", Measurement: " << measurement << std::endl;
+      }
     } else {
       std::cerr << "Error: Missing input file. Use --help for usage information." << std::endl;
       return 1;
