@@ -30,13 +30,27 @@ make -j8 install # If you are on an 8-core machine
 
 
 # Usage
-Provide detailed instructions on how to use your application. Include command-line options, expected input, and sample usage examples.
-# Display help message
+How to compile and execute the code contents of this repository
+
+Compile code by running the makefile
+'''
+make
+'''
+
+Remove .o files 
+'''
+make clean
+'''
+
+Display help message
+'''
 ./main -h
+'''
 
-# Read a CSV file
-./main -i inputfile.csv
-
+Read a CSV file
+'''
+./main -i spring.csv
+'''
 
 # Directory structure
 
