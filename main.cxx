@@ -1,14 +1,16 @@
-
-
 #include <iostream>
 #include "argh.h"
 #include "csv.h"
+#include "date.h"
+
+using namespace date;
+using namespace std::chrono;
 
 int main(int argc, char *argv[]) {
   argh::parser cmdl(argc, argv);
 
   if (cmdl[{ "-h", "--help" }]) {
-    std::cout << "Help message" << std::endl;
+    std::cout << "Execute by ./main -i spring.csv" << std::endl;
     return 0;
   }
 
@@ -17,15 +19,15 @@ int main(int argc, char *argv[]) {
     if (cmdl(1) >> inputFile) {
       std::cout << "Reading the CSV file: " << inputFile << std::endl;
 
-      // Add code to process the CSV file using your CSV parsing library.
-      io::CSVReader<5> in(inputFile);
-      in.read_header(io::ignore_extra_column, "day", "year", "month", "ignoreme", "measurement");
-      int day, year, month;
+      io::CSVReader<4> in(inputFile);
+      in.read_header(io::ignore_extra_column, "day", "year", "month", "measurement");
+      int d, y, m;
       double measurement;
 
-      while (in.read_row(day, year, month, std::ignore, measurement)) {
-        // Process your CSV data here, ignoring the "ignoreme" column.
-        std::cout << "Day: " << day << ", Year: " << year << ", Month: " << month << ", Measurement: " << measurement << std::endl;
+      while (in.read_row(d, y, m, measurement)) {
+        auto date = year{y}/m/d;
+        auto WeekDay = weekday{date};
+        std::cout << "Date: " << date << ", Weekday: " << WeekDay << ", Measurement: " << measurement << std::endl;
       }
     } else {
       std::cerr << "Error: Missing input file. Use --help for usage information." << std::endl;
