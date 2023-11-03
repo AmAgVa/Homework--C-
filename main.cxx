@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   argh::parser cmdl(argc, argv);
 
   if (cmdl[{ "-h", "--help" }]) {
-    std::cout << "Execute by ./main -i spring.csv" << std::endl;
+    std::cout << "Execute by ./main -i data.csv" << std::endl;
     return 0;
   }
 
@@ -19,12 +19,13 @@ int main(int argc, char *argv[]) {
     if (cmdl(1) >> inputFile) {
       std::cout << "Reading the CSV file: " << inputFile << std::endl;
 
-      io::CSVReader<4> in(inputFile);
-      in.read_header(io::ignore_extra_column, "day", "year", "month", "measurement");
+      io::CSVReader<5> in(inputFile);
+      in.read_header(io::ignore_extra_column, "day", "year", "month", "ignoreme", "measurement");
       int d, y, m;
       double measurement;
+      std::string ignoreme;
 
-      while (in.read_row(d, y, m, measurement)) {
+      while (in.read_row(d, y, m, ignoreme, measurement)) {
         auto date = year{y}/m/d;
         auto WeekDay = weekday{date};
         std::cout << "Date: " << date << ", Weekday: " << WeekDay << ", Measurement: " << measurement << std::endl;
