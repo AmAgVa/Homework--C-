@@ -1,10 +1,9 @@
 CXX := g++
-CXXWARNINGS := -Wall -Wextra -Werror -Wall -Wextra -Werror -Wno-stringop-truncation
+CXXWARNINGS := -Wall -Wextra -Werror -Wno-stringop-truncation
 CXXOPT := -O3
 CXXSTD := -std=c++17
 INCLUDES := -I include -I external/include 
 CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES)
-
 
 .PHONY: all clean
 
