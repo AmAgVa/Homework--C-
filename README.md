@@ -1,6 +1,6 @@
 # MNXB11-project-template
 # About
-This folder contains the following instructions on how to build a CLI library for the submission for homework tutorial 8 to 11. This repository only containt libraries with header only files. 
+This folder contains the following instructions on how to build a CLI library for the submission for homework tutorial 8 to 11. This repository only contains libraries with header only files. 
 
 
 # Usage
