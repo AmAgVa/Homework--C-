@@ -1,32 +1,6 @@
 # MNXB11-project-template
 # About
-This folder contains the following instructions on how to build a CLI library for the submission for homework tutorial 8 to 11. 
-
-
-## Adding external software libraries
-
-If you want to make use of external software libraries with your project, you will always have to tell the tool that builds your project. The Makefile included in this template will pick up any header files in the external/include directory and look for libraries in external/lib and external/lib64 so if you use external as your installation directory, you only need to add the corresponding `-l` flag to the linker.
-
-Here's an illustration of the typical process to add a (CMake based) external library
-```
-mkdir homework-C--
-cd homework-C--
-
-``` sh
-# Clone or download this library in the directory previously created
-git clone git@github.com:mmahnic/argumentum.git 
-
-mkdir build/homework-C-- -pv # -p will tell mkdir to create the build/ directory if it doesn't already exist 
-# Go into the build directory
-cd build/homework-C-- 
-# Look up the documentation for the library to find out if there are any additional flags you need for CMake 
-
-# This command tells CMake to configure the build directory based on the source code in the ../../homework-C-- folder and to install the resulting headers and library files into ../../external
-cmake ../../alibrary -DCMAKE_INSTALL_PREFIX=../../external 
-# Build and install! Use -jN to launch N jobs
-make -j8 install # If you are on an 8-core machine
-```
-
+This folder contains the following instructions on how to build a CLI library for the submission for homework tutorial 8 to 11. This repository only containt libraries with header only files. 
 
 
 # Usage
@@ -49,9 +23,34 @@ make clean
 
 ### Read a CSV file
 ```
-./main -i spring.csv
+./main -i <input_file.csv>  #can the one of the .csv file from datasets
 ```
 
+
+## Adding external software libraries
+
+If you want to make use of external software libraries with your project, you will always have to tell the tool that builds your project. The Makefile included in this template will pick up any header files in the external/include directory, you only need to add the corresponding `-l` flag to the linker.
+
+Here's an illustration of the typical process to add a (CMake based) external library
+```
+mkdir homework-C--
+cd homework-C--
+```
+```
+# Clone or download this library in the directory previously created
+git clone <library> 
+
+mkdir build/homework-C-- -pv # -p will tell mkdir to create the build/ directory if it doesn't already exist 
+# Go into the build directory
+cd build/homework-C-- 
+# Look up the documentation for the library to find out if there are any additional flags you need for CMake 
+
+# This command tells CMake to configure the build directory based on the source code in the ../../homework-C-- folder and to install the resulting headers and library files into ../../external
+cmake ../../alibrary -DCMAKE_INSTALL_PREFIX=../../external 
+
+# Build and install! Use -jN to launch N jobs
+make -j8 install # If you are on an 8-core machine
+```
 # Directory structure
 
 The base directory here contains your "main" file, i.e. the C++ file that you
