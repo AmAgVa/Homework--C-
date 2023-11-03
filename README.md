@@ -32,25 +32,25 @@ make -j8 install # If you are on an 8-core machine
 # Usage
 How to compile and execute the code contents of this repository
 
-Compile code by running the makefile
-'''
+### Compile code by running the makefile
+```
 make
-'''
+```
 
-Remove .o files 
-'''
+### Remove .o files 
+```
 make clean
-'''
+```
 
-Display help message
-'''
+### Display help message
+```
 ./main -h
-'''
+```
 
-Read a CSV file
-'''
+### Read a CSV file
+```
 ./main -i spring.csv
-'''
+```
 
 # Directory structure
 
