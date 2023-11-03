@@ -1,15 +1,25 @@
 
 #include <iostream>
-int main(int argc, char *argv[]) {
-  std::cout << "I am just a code template, you need to implement the "
-               "functionality you want to use yourself!"
-            << std::endl;
+#include "argh.h"
 
-  std::cout << "We were passed " << argc
-            << " command line arguments, the first of which was " << argv[0]
-            << std::endl;
-  std::cout << "With a good CLI library, we could use the command line "
-               "arguments to make a useful program."
-            << std::endl;
+int main(int argc, char *argv[]) {
+  argh::parser cmdl(argc, argv);
+  
+  if (cmdl[{ "-h", "--help" }]) {
+    std::cout << "Produce a help message describing the CLI when passing in -h or --help" << std::endl;
+    return 0;
+  }
+
+  if (cmdl({ "-i", "--input-file" })) {
+    std::string inputFile;
+    if (cmdl(1) >> inputFile) {
+      std::cout << "Reading the CSV file: " << inputFile << std::endl;
+      // Add your code to process the CSV file here
+    } else {
+      std::cerr << "Error: Missing input file. Use --help for usage information." << std::endl;
+      return 1;
+    }
+  }
+
   return 0;
 }
