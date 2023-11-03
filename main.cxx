@@ -1,18 +1,19 @@
-
 #include <iostream>
-#include "argh.h"
+#include <vector>
+#include <string>
+#include <algorithm>
 
 int main(int argc, char *argv[]) {
-  argh::parser cmdl(argc, argv);
-  
-  if (cmdl[{ "-h", "--help" }]) {
-    std::cout << "Produce a help message describing the CLI when passing in -h or --help" << std::endl;
+  std::vector<std::string> args(argv, argv + argc);
+
+  if (std::find(args.begin(), args.end(), "-h") != args.end() || std::find(args.begin(), args.end(), "--help") != args.end()) {
+    std::cout << "Help message when passing in -h or --help" << std::endl;
     return 0;
   }
 
-  if (cmdl({ "-i", "--input-file" })) {
-    std::string inputFile;
-    if (cmdl(1) >> inputFile) {
+  if (args.size() >= 2 && (args[1] == "-i" || args[1] == "--input-file")) {
+    if (args.size() >= 3) {
+      std::string inputFile = args[2];
       std::cout << "Reading the CSV file: " << inputFile << std::endl;
       // Add your code to process the CSV file here
     } else {
